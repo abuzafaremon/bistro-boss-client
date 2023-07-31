@@ -57,9 +57,11 @@ const Header = () => {
             {navOptions}
           </ul>
         </div>
-        <Link to="/" className="flex flex-col uppercase leading-[10px]">
-          <span className="text-xl font-bold">Bistro Boss</span>
-          <span className="tracking-[0.2em] font-medium">Restaurant</span>
+        <Link to="/" className="flex flex-col uppercase">
+          <span className="text-xl leading-none font-bold">Bistro Boss</span>
+          <span className="tracking-[0.2em] font-medium leading-none">
+            Restaurant
+          </span>
         </Link>
       </div>
       <div className="navbar-end hidden lg:flex">

@@ -1,3 +1,24 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.carousel .thumbs {
+  display: flex;
+  justify-content: center;
+}
+
+.itemSlide ul.slider {
+  gap: 10px;
+}
+
+@media screen and (min-width: 640px) {
+  .itemSlide ul.slider {
+    gap: 20px;
+  }
+}
+
+.carousel .slide .legend {
+  bottom: 15px !important;
+  padding: 0 !important;
+  font-size: 14px !important;
+}

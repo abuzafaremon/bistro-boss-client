@@ -1,37 +1,65 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
 const Header = () => {
+  const [headerBg, setHeaderBg] = useState(false);
+  window.onscroll = () => {
+    if (window.scrollY > 710) {
+      setHeaderBg(true);
+    } else {
+      setHeaderBg(false);
+    }
+  };
   const navOptions = (
     <>
       <li>
-        <Link className="font-bold" to="/">
+        <Link
+          className={`font-bold ${!headerBg && "hover:text-[#EEFF25]"}`}
+          to="/"
+        >
           Home
         </Link>
       </li>
       <li>
-        <Link className="font-bold" to="/">
+        <Link
+          className={`font-bold ${!headerBg && "hover:text-[#EEFF25]"}`}
+          to="/"
+        >
           Contact Us
         </Link>
       </li>
       <li>
-        <Link className="font-bold" to="/">
+        <Link
+          className={`font-bold ${!headerBg && "hover:text-[#EEFF25]"}`}
+          to="/"
+        >
           Dashboard
         </Link>
       </li>
       <li>
-        <Link className="font-bold" to="/">
+        <Link
+          className={`font-bold ${!headerBg && "hover:text-[#EEFF25]"}`}
+          to="/"
+        >
           Our Menu
         </Link>
       </li>
       <li>
-        <Link className="font-bold" to="/">
+        <Link
+          className={`font-bold ${!headerBg && "hover:text-[#EEFF25]"}`}
+          to="/"
+        >
           Our Shop
         </Link>
       </li>
     </>
   );
   return (
-    <div className="navbar bg-base-100 shadow">
+    <header
+      className={`navbar fixed top-0 max-w-screen-xl z-50 shadow ${
+        headerBg ? "bg-base-100" : "bg-opacity-30 bg-black text-neutral-content"
+      }`}
+    >
       <div className="navbar-start">
         <div className="dropdown">
           <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -52,7 +80,11 @@ const Header = () => {
           </label>
           <ul
             tabIndex={0}
-            className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+            className={`menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52 ${
+              headerBg
+                ? "bg-base-100"
+                : "bg-opacity-80 bg-black text-neutral-content"
+            }`}
           >
             {navOptions}
           </ul>
@@ -91,7 +123,7 @@ const Header = () => {
           </ul>
         </div>
       </div>
-    </div>
+    </header>
   );
 };
 

@@ -10,48 +10,27 @@ const Header = () => {
       setHeaderBg(false);
     }
   };
+  const navItems = [
+    { title: "home", link: "home" },
+    { title: "contact us", link: "contact" },
+    { title: "dashboard", link: "dashboard" },
+    { title: "our menu", link: "menu" },
+    { title: "our shop", link: "shop" },
+  ];
   const navOptions = (
     <>
-      <li>
-        <Link
-          className={`font-bold ${!headerBg && "hover:text-[#EEFF25]"}`}
-          to="/"
-        >
-          Home
-        </Link>
-      </li>
-      <li>
-        <Link
-          className={`font-bold ${!headerBg && "hover:text-[#EEFF25]"}`}
-          to="/"
-        >
-          Contact Us
-        </Link>
-      </li>
-      <li>
-        <Link
-          className={`font-bold ${!headerBg && "hover:text-[#EEFF25]"}`}
-          to="/"
-        >
-          Dashboard
-        </Link>
-      </li>
-      <li>
-        <Link
-          className={`font-bold ${!headerBg && "hover:text-[#EEFF25]"}`}
-          to="/"
-        >
-          Our Menu
-        </Link>
-      </li>
-      <li>
-        <Link
-          className={`font-bold ${!headerBg && "hover:text-[#EEFF25]"}`}
-          to="/"
-        >
-          Our Shop
-        </Link>
-      </li>
+      {navItems.map((item, i) => (
+        <li key={i}>
+          <Link
+            className={`font-bold capitalize ${
+              !headerBg && "hover:text-[#EEFF25]"
+            }`}
+            to={item.link.toLowerCase()}
+          >
+            {item.title}
+          </Link>
+        </li>
+      ))}
     </>
   );
   return (

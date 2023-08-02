@@ -25,7 +25,6 @@ const Category = () => {
           autoPlay
           infiniteLoop
           showStatus={false}
-          showArrows={false}
           showThumbs={false}
           showIndicators={false}
           centerMode

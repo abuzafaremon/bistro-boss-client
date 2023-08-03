@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import SectionHeader from "../../../components/Shared/SectionHeader/SectionHeader";
-import FeaturedItem from "../../../components/Shared/FeaturedItem";
+import RecommendedItem from "../../../components/Shared/RecommendedItem";
 
 const RecommendedItems = () => {
   const [featured, setFeatured] = useState([]);
@@ -20,7 +20,7 @@ const RecommendedItems = () => {
         />
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5 justify-items-center">
           {featured.map((item) => (
-            <FeaturedItem key={item._id} item={item} />
+            <RecommendedItem key={item._id} item={item} />
           ))}
         </div>
       </div>

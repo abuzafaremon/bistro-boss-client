@@ -37,3 +37,23 @@
   padding: 0 !important;
   font-size: 14px !important;
 }
+
+/* control arrow styling */
+.testimonials .control-arrow {
+  background: none !important;
+}
+
+.control-next.control-arrow:before {
+  border-left: 12px solid #fff !important;
+  border-left-color: #ffa300 !important;
+}
+
+.control-prev.control-arrow:before {
+  border-right: 12px solid #fff !important;
+  border-right-color: #ffa300 !important;
+}
+
+.testimonials .control-arrow:before {
+  border-top: 12px solid transparent !important;
+  border-bottom: 12px solid transparent !important;
+}

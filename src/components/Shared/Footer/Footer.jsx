@@ -13,28 +13,17 @@ const Footer = () => {
         </div>
         <div>
           <span className="footer-title">Company</span>
-          <a className="link link-hover">About us</a>
-          <a className="link link-hover">Contact</a>
-          <a className="link link-hover">Jobs</a>
-          <a className="link link-hover">Press kit</a>
-        </div>
-        <div>
-          <span className="footer-title">Legal</span>
           <a className="link link-hover">Terms of use</a>
           <a className="link link-hover">Privacy policy</a>
           <a className="link link-hover">Cookie policy</a>
+          <a className="link link-hover">Jobs</a>
         </div>
-      </div>
-      <div className="footer gap-4 px-10 py-4 border-t bg-base-200 text-base-content border-base-300">
-        <div className="items-center grid-flow-col order-last md:order-first">
-          <p>
-            Copyright &copy; {new Date().getFullYear()} - All right reserved by
-            <Link to="/"> Bistro Boss</Link>
-          </p>
-        </div>
-        <div className="md:place-self-center md:justify-self-end order-first md:order-last">
-          <div className="grid grid-flow-col gap-4">
-            <a>
+        <div>
+          <span className="footer-title">Follow us</span>
+          <p>Follow us on social media</p>
+
+          <div className="grid grid-flow-col gap-4 mt-2">
+            <a href="https://facebook.com" target="_blank" rel="noreferrer">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -45,7 +34,7 @@ const Footer = () => {
                 <path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"></path>
               </svg>
             </a>
-            <a>
+            <a href="https://instagram.com" target="_blank" rel="noreferrer">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -70,6 +59,12 @@ const Footer = () => {
             </a>
           </div>
         </div>
+      </div>
+      <div className="footer justify-center py-4 border-t bg-base-200 text-base-content border-base-300">
+        <p className="flex items-center text-xs sm:text-sm">
+          Copyright &copy; {new Date().getFullYear()} - All right reserved by
+          <Link to="/"> Bistro Boss</Link>
+        </p>
       </div>
     </footer>
   );

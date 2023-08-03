@@ -1,4 +1,4 @@
-const FeaturedItem = ({ item }) => {
+const RecommendedItems = ({ item }) => {
   const { image, name, recipe } = item;
   return (
     <div className="card card-compact max-w-[400px] bg-[#F3F3F3] shadow lg:shadow-lg">
@@ -14,10 +14,13 @@ const FeaturedItem = ({ item }) => {
           <button className="uppercase text-[#ffa300] border-b-[3px] border-b-[#ffa300] lg:text-xl font-medium bg-[#E8E8E8] hover:bg-[#1F2937] px-3 lg:px-5 py-2 rounded-lg transition-all">
             Add to cart
           </button>
+          {/* <button className="uppercase text-[#ffa300] border-b-[3px] border-b-[#ffa300] lg:text-xl font-medium bg-[#E8E8E8] hover:bg-[#1F2937] px-3 lg:px-5 py-2 rounded-lg transition-all">
+            Add to cart
+          </button> */}
         </div>
       </div>
     </div>
   );
 };
 
-export default FeaturedItem;
+export default RecommendedItems;

@@ -11,7 +11,7 @@ const FeaturedItem = ({ item }) => {
           {recipe?.split(" ").slice(0, 9).join(" ")}
         </p>
         <div className="card-actions justify-center">
-          <button className="uppercase text-[#BB8506] border-b-[3px] border-b-[#BB8506] lg:text-xl font-medium bg-[#E8E8E8] hover:bg-[#1F2937] px-3 lg:px-5 py-2 rounded-lg transition-all">
+          <button className="uppercase text-[#ffa300] border-b-[3px] border-b-[#ffa300] lg:text-xl font-medium bg-[#E8E8E8] hover:bg-[#1F2937] px-3 lg:px-5 py-2 rounded-lg transition-all">
             Add to cart
           </button>
         </div>

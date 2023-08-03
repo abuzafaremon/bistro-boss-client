@@ -23,7 +23,7 @@ const Header = () => {
         <li key={i}>
           <Link
             className={`font-bold capitalize ${
-              !headerBg && "hover:text-[#EEFF25]"
+              !headerBg && "hover:text-[#ffa300]"
             }`}
             to={item.link.toLowerCase()}
           >

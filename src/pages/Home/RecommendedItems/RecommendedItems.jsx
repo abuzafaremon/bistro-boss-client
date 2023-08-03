@@ -2,14 +2,15 @@ import { useEffect, useState } from "react";
 import SectionHeader from "../../../components/Shared/SectionHeader/SectionHeader";
 import FeaturedItem from "../../../components/Shared/FeaturedItem";
 
-const FeaturedItems = () => {
+const RecommendedItems = () => {
   const [featured, setFeatured] = useState([]);
-  console.log(featured);
+
   useEffect(() => {
     fetch("menu.json")
       .then((res) => res.json())
-      .then((data) => setFeatured(data.slice(12, 15)));
+      .then((data) => setFeatured(data?.slice(12, 15)));
   }, []);
+
   return (
     <section className="py-10 px-2 lg:px-0 max-w-screen-lg mx-auto">
       <div className="container mx-auto">
@@ -27,4 +28,4 @@ const FeaturedItems = () => {
   );
 };
 
-export default FeaturedItems;
+export default RecommendedItems;

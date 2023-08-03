@@ -11,7 +11,7 @@ const MenuItem = ({ item }) => {
         <h2 className="text-[#151515] text-xl">{name}</h2>
         <p className="text-[#737373] text-sm lg:text-base">{recipe}</p>
       </div>
-      <h3 className="text-[#BB8506] text-xl">${price}</h3>
+      <h3 className="text-[#ffa300] text-xl">${price}</h3>
     </div>
   );
 };

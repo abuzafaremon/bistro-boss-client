@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 
 const Header = () => {
   const [headerBg, setHeaderBg] = useState(false);
+  const headerRef = useRef();
   window.onscroll = () => {
-    if (window.scrollY > 710) {
+    const banner = document?.getElementById("banner");
+    if (window.scrollY > banner.offsetHeight - headerRef.current.offsetHeight) {
       setHeaderBg(true);
     } else {
       setHeaderBg(false);
@@ -38,6 +40,7 @@ const Header = () => {
       className={`navbar fixed top-0 max-w-screen-xl z-50 shadow ${
         headerBg ? "bg-base-100" : "bg-opacity-30 bg-black text-neutral-content"
       }`}
+      ref={headerRef}
     >
       <div className="navbar-start">
         <div className="dropdown">
@@ -68,7 +71,13 @@ const Header = () => {
             {navOptions}
           </ul>
         </div>
-        <Link to="/" className="flex flex-col uppercase">
+        <Link
+          to="/"
+          className={`flex flex-col uppercase ${
+            headerBg &&
+            "bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500 hover:to-indigo-700"
+          }`}
+        >
           <span className="text-xl leading-none font-bold">Bistro Boss</span>
           <span className="tracking-[0.2em] font-medium leading-none">
             Restaurant

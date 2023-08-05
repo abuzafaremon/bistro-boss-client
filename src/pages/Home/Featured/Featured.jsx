@@ -4,7 +4,7 @@ const Featured = () => {
   const featuredImg = "/assets/images/home/featured.jpg";
   return (
     <section
-      className={`bg-[url('${featuredImg}')] bg-no-repeat bg-cover bg-fixed`}
+      className={`bg-[url('/assets/images/home/featured.jpg')] bg-no-repeat bg-cover bg-fixed`}
     >
       <div className="bg-black bg-opacity-60 text-white py-10 lg:py-20 px-2 lg:px-0">
         <div className="container mx-auto">

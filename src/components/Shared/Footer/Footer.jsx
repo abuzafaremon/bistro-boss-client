@@ -2,8 +2,8 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <footer>
-      <div className="footer p-10 bg-base-200 text-base-content">
+    <footer className="bg-base-200">
+      <div className="max-w-screen-lg mx-auto footer py-10 px-2 lg:px-0 text-base-content">
         <div>
           <span className="footer-title">Contact Us</span>
           <address>123 ABS Street, Uni 21, Bangladesh</address>
@@ -63,7 +63,10 @@ const Footer = () => {
       <div className="footer justify-center py-4 border-t bg-base-200 text-base-content border-base-300">
         <p className="flex items-center text-xs sm:text-sm">
           Copyright &copy; {new Date().getFullYear()} - All right reserved by
-          <Link to="/"> Bistro Boss</Link>
+          <Link className="text-[#ffa300]" to="/">
+            {" "}
+            Bistro Boss
+          </Link>
         </p>
       </div>
     </footer>

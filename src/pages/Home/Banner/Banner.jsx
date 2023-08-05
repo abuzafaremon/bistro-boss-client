@@ -12,7 +12,7 @@ const Banner = () => {
     { img: "/assets/images/home/bannerSlide/06.png" },
   ];
   return (
-    <section>
+    <section id="banner">
       <Carousel autoPlay infiniteLoop showStatus={false}>
         {images.map((image, i) => (
           <div key={i}>

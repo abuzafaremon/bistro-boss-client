@@ -17,6 +17,10 @@
 }
 
 /* carousel styling */
+.carousel .thumbs-wrapper {
+  margin: 20px auto !important;
+}
+
 .carousel .thumbs {
   display: flex;
   justify-content: center;

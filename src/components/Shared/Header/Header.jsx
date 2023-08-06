@@ -14,10 +14,10 @@ const Header = () => {
   };
   const navItems = [
     { title: "home", link: "home" },
-    { title: "contact us", link: "contact" },
-    { title: "dashboard", link: "dashboard" },
     { title: "our menu", link: "menu" },
     { title: "our shop", link: "shop" },
+    { title: "contact us", link: "contact" },
+    { title: "dashboard", link: "dashboard" },
   ];
   const navOptions = (
     <>

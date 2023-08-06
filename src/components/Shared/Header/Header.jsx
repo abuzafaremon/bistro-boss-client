@@ -6,7 +6,10 @@ const Header = () => {
   const headerRef = useRef();
   window.onscroll = () => {
     const banner = document?.getElementById("banner");
-    if (window.scrollY > banner.offsetHeight - headerRef.current.offsetHeight) {
+    if (
+      window.scrollY >
+      banner?.offsetHeight - headerRef?.current.offsetHeight
+    ) {
       setHeaderBg(true);
     } else {
       setHeaderBg(false);

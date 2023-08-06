@@ -1,16 +1,11 @@
 import { Helmet } from "react-helmet-async";
 import SectionIntro from "../../components/Shared/SectionIntro/SectionIntro";
 import Offered from "./Offered";
-import useMenu from "../../hooks/useMenu";
 import CommonSection from "./CommonSection";
+import useItems from "../../hooks/useItems";
 
 const Menu = () => {
-  const [menu] = useMenu();
-  const offered = menu?.filter((d) => d.category === "offered");
-  const deserts = menu?.filter((d) => d.category === "dessert");
-  const pizzas = menu?.filter((d) => d.category === "pizza");
-  const salads = menu?.filter((d) => d.category === "salad");
-  const soups = menu?.filter((d) => d.category === "soup");
+  const [deserts, pizzas, salads, soups, , offered] = useItems();
   const sectionArray = [
     { items: deserts, bgImg: "/assets/images/menu/dessert-bg.jpeg" },
     { items: pizzas, bgImg: "/assets/images/menu/pizza-bg.jpg" },

@@ -15,7 +15,7 @@ const CommonSection = ({ items, bgImg }) => {
       <div className="max-w-screen-lg mx-auto py-10 px-2 lg:px-0">
         <div className="container">
           <ItemsMapping items={items} />
-          <CommonBtn link="shop" />
+          <CommonBtn link={`shop`} />
         </div>
       </div>
     </section>

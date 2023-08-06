@@ -19,7 +19,7 @@ const Home = () => {
       <div className="max-w-screen-lg mx-auto">
         <SectionIntro
           bgImg={"/assets/images/home/chef-service.jpg"}
-          bg="white"
+          bgClr="bg-base-100"
           bgOpacity="bg-opacity-100"
           textClr="#151515"
           title="Bistro Boss"

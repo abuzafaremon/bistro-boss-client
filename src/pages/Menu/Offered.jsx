@@ -8,7 +8,7 @@ const Offered = ({ offered }) => {
       <div className="container mx-auto">
         <SectionHeader subTitle="---Don't miss---" title="TODAY'S OFFER" />
         <ItemsMapping items={offered} />
-        <CommonBtn link="shop" />
+        <CommonBtn link="shop/dessert" />
       </div>
     </section>
   );

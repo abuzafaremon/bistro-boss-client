@@ -1,24 +1,20 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
 const Header = () => {
   const [headerBg, setHeaderBg] = useState(false);
-  const headerRef = useRef();
   window.onscroll = () => {
-    const banner = document?.getElementById("banner");
-    if (
-      window.scrollY >
-      banner?.offsetHeight - headerRef?.current.offsetHeight
-    ) {
+    if (window.scrollY > 270) {
       setHeaderBg(true);
     } else {
       setHeaderBg(false);
     }
   };
+  let user;
   const navItems = [
     { title: "home", link: "home" },
     { title: "our menu", link: "menu" },
-    { title: "our shop", link: "shop" },
+    { title: "our shop", link: "shop/salad" },
     { title: "contact us", link: "contact" },
     { title: "dashboard", link: "dashboard" },
   ];
@@ -43,7 +39,6 @@ const Header = () => {
       className={`navbar fixed top-0 max-w-screen-xl z-50 shadow ${
         headerBg ? "bg-base-100" : "bg-opacity-30 bg-black text-neutral-content"
       }`}
-      ref={headerRef}
     >
       <div className="navbar-start">
         <div className="dropdown">
@@ -88,31 +83,47 @@ const Header = () => {
         </Link>
       </div>
       <div className="navbar-end hidden lg:flex">
-        <ul className="menu menu-horizontal px-1">{navOptions}</ul>
-        <div className="dropdown dropdown-end">
-          <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-            <div className="w-10 rounded-full">
-              <img src="/images/stock/photo-1534528741775-53994a69daeb.jpg" />
-            </div>
-          </label>
-          <ul
-            tabIndex={0}
-            className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
-          >
+        <ul className="menu menu-horizontal px-1">
+          {navOptions}
+          {user || (
             <li>
-              <a className="justify-between">
-                Profile
-                <span className="badge">New</span>
-              </a>
+              <Link
+                className={`font-bold uppercase ${
+                  !headerBg && "hover:text-[#ffa300]"
+                }`}
+                to="/login"
+              >
+                Login
+              </Link>
             </li>
-            <li>
-              <a>Settings</a>
-            </li>
-            <li>
-              <a>Logout</a>
-            </li>
-          </ul>
-        </div>
+          )}
+        </ul>
+        {user && (
+          <div className="dropdown dropdown-end">
+            <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+              <div className="w-10 rounded-full">
+                <img src="/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+              </div>
+            </label>
+            <ul
+              tabIndex={0}
+              className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 text-black font-semibold rounded-box w-52"
+            >
+              <li>
+                <a className="justify-between">
+                  Profile
+                  <span className="badge">New</span>
+                </a>
+              </li>
+              <li>
+                <a>Settings</a>
+              </li>
+              <li>
+                <a>Logout</a>
+              </li>
+            </ul>
+          </div>
+        )}
       </div>
     </header>
   );

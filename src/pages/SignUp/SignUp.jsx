@@ -1,51 +1,23 @@
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
-import {
-  loadCaptchaEnginge,
-  LoadCanvasTemplate,
-  validateCaptcha,
-} from "react-simple-captcha";
 import { AuthContext } from "../../providers/AuthProvider";
 
-const Login = () => {
-  const [disabled, setDisabled] = useState(true);
-  const [validateSuccess, setValidateSuccess] = useState("");
-  const { loginUser } = useContext(AuthContext);
+const SignUp = () => {
   const {
     register,
     formState: { errors },
     handleSubmit,
   } = useForm();
 
-  // initial captcha load
-  useEffect(() => {
-    loadCaptchaEnginge(6);
-  }, []);
+  const { createUser } = useContext(AuthContext);
 
-  //captchaValidate
-  const captchaRef = useRef();
-  const captchaValidate = (e) => {
-    e.preventDefault();
-    const user_captcha = captchaRef.current.value;
-    if (validateCaptcha(user_captcha)) {
-      setDisabled(false);
-      setValidateSuccess("Validate Success");
-    }
-  };
-
-  //form submission
   const onSubmit = (data) => {
-    console.log(data);
-    loginUser(data.email, data.password).then((result) => {
+    createUser(data.email, data.password).then((result) => {
       // Signed in
       const user = result.user;
       console.log(user);
     });
-    // .catch((error) => {
-    //   const errorCode = error.code;
-    //   const errorMessage = error.message;
-    // });
   };
   return (
     <section
@@ -53,16 +25,34 @@ const Login = () => {
       style={{ backgroundImage: "url('/assets/images/login/login-bg.png')" }}
     >
       <div className="hero max-w-screen-lg mx-auto min-h-screen sm:py-5">
-        <div className="hero-content lg:p-6 w-full h-full flex-col gap-28 lg:flex-row shadow-2xl rounded-lg">
+        <div className="hero-content lg:p-6 w-full h-full flex-col gap-28 lg:flex-row-reverse shadow-2xl rounded-lg">
           <div className="hidden lg:block">
             <img src="/assets/images/login/login-img.png" alt="Login image" />
           </div>
           <div className="card flex-shrink-0 w-full max-w-sm shadow-xl">
             <div className="card-body p-6">
               <h1 className="text-2xl sm:text-3xl md:text-4xl text-center font-bold">
-                Login
+                Sign Up
               </h1>
               <form onSubmit={handleSubmit(onSubmit)}>
+                <div className="form-control">
+                  <label className="label pb-0.5">
+                    <span className="label-text">Name</span>
+                  </label>
+                  <input
+                    {...register("name", {
+                      required: "Name is required",
+                    })}
+                    type="text"
+                    placeholder="Your Name"
+                    className="input input-bordered"
+                  />
+                  {errors.name && (
+                    <p className="text-rose-500 text-sm" role="alert">
+                      {errors.name.message}
+                    </p>
+                  )}
+                </div>
                 <div className="form-control">
                   <label className="label pb-0.5">
                     <span className="label-text">Email</span>
@@ -98,48 +88,18 @@ const Login = () => {
                       {errors.password.message}
                     </p>
                   )}
-                  <label className="label">
-                    <a href="#" className="label-text-alt link link-hover">
-                      Forgot password?
-                    </a>
-                  </label>
-                </div>
-                <div className="form-control mb-5 pl-0.5 input input-bordered">
-                  <div className="mt-3.5">
-                    <LoadCanvasTemplate reloadColor="#ffa300" />
-                  </div>
-                </div>
-                <div className="form-control">
-                  <div className="flex">
-                    <input
-                      {...register("captcha")}
-                      ref={captchaRef}
-                      type="text"
-                      placeholder="Type here"
-                      className="input input-bordered w-full"
-                    />
-                    <button
-                      onClick={captchaValidate}
-                      disabled={!disabled}
-                      className="btn btn-outline"
-                    >
-                      Validate
-                    </button>
-                  </div>
-                  <p className="text-success">{validateSuccess}</p>
                 </div>
                 <div className="form-control mt-6">
                   <input
                     type="submit"
-                    value="Login"
-                    disabled={disabled}
+                    value="Sign Up"
                     className="btn btn-outline"
                   />
                   <p className="text-[#ffa300] text-center text-sm mt-2">
-                    New Here?
-                    <Link to="/signup" className="font-bold">
+                    Have an Account?
+                    <Link to="/login" className="font-bold">
                       {" "}
-                      Create a New Account
+                      Please Login
                     </Link>
                   </p>
                 </div>
@@ -152,4 +112,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default SignUp;

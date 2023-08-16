@@ -6,6 +6,7 @@ import NotFound from "../pages/NotFound/NotFound";
 import Shop from "../pages/Shop/Shop";
 import Login from "../pages/Login/Login";
 import SignUp from "../pages/SignUp/SignUp";
+import PrivateRoute from "./PrivateRoute";
 
 export const router = createBrowserRouter([
   {
@@ -26,7 +27,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "/shop/:category",
-        element: <Shop />,
+        element: (
+          <PrivateRoute>
+            <Shop />
+          </PrivateRoute>
+        ),
       },
     ],
   },

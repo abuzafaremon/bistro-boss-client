@@ -1,8 +1,11 @@
 import { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../providers/AuthProvider";
+import swal from "sweetalert";
+import Loading from "../Loading";
 
 const Header = () => {
+  const { user, logOut, loading } = useContext(AuthContext);
   const [headerBg, setHeaderBg] = useState(false);
   window.onscroll = () => {
     if (window.scrollY > 270) {
@@ -11,7 +14,6 @@ const Header = () => {
       setHeaderBg(false);
     }
   };
-  let user;
   const navItems = [
     { title: "home", link: "home" },
     { title: "our menu", link: "menu" },
@@ -35,6 +37,18 @@ const Header = () => {
       ))}
     </>
   );
+  const navigate = useNavigate();
+  const handleLogOut = () => {
+    logOut()
+      .then(() => {
+        swal("Logout Successful", "", "success");
+        navigate("/login");
+      })
+      .catch((err) => swal("", `${err}`, "error"));
+  };
+  if (loading) {
+    return <Loading />;
+  }
   return (
     <header
       className={`navbar fixed top-0 max-w-screen-xl z-50 shadow ${
@@ -84,26 +98,14 @@ const Header = () => {
         </Link>
       </div>
       <div className="navbar-end hidden lg:flex">
-        <ul className="menu menu-horizontal px-1">
-          {navOptions}
-          {user || (
-            <li>
-              <Link
-                className={`font-bold uppercase ${
-                  !headerBg && "hover:text-[#ffa300]"
-                }`}
-                to="/login"
-              >
-                Login
-              </Link>
-            </li>
-          )}
-        </ul>
-        {user && (
+        <ul className="menu menu-horizontal px-1">{navOptions}</ul>
+      </div>
+      <div className="max-w-max">
+        {user ? (
           <div className="dropdown dropdown-end">
             <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
               <div className="w-10 rounded-full">
-                <img src="/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                <img src={user?.photoURL} alt={user?.displayName} />
               </div>
             </label>
             <ul
@@ -112,18 +114,29 @@ const Header = () => {
             >
               <li>
                 <a className="justify-between">
-                  Profile
-                  <span className="badge">New</span>
+                  {user?.displayName}
+                  <span className="badge">Profile</span>
                 </a>
               </li>
               <li>
-                <a>Settings</a>
+                <a>Setting</a>
               </li>
               <li>
-                <a>Logout</a>
+                <a onClick={handleLogOut}>Logout</a>
               </li>
             </ul>
           </div>
+        ) : (
+          <li>
+            <Link
+              className={`font-bold uppercase ${
+                !headerBg && "hover:text-[#ffa300]"
+              }`}
+              to="/login"
+            >
+              Login
+            </Link>
+          </li>
         )}
       </div>
     </header>

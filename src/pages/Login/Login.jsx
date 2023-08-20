@@ -14,20 +14,22 @@ import Loading from "../../components/Shared/Loading";
 const Login = () => {
   const [disabled, setDisabled] = useState(true);
   const [validateSuccess, setValidateSuccess] = useState("");
-  const { loginUser, loading } = useContext(AuthContext);
+  const { loginUser, loading, setLoading } = useContext(AuthContext);
+
   const {
     register,
     formState: { errors },
     handleSubmit,
   } = useForm();
+
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
 
   // initial captcha load
-  useEffect(() => {
-    loadCaptchaEnginge(6);
-  }, []);
+  // useEffect(() => {
+  //   loadCaptchaEnginge(6);
+  // }, []);
 
   //captchaValidate
   const captchaRef = useRef();
@@ -49,6 +51,7 @@ const Login = () => {
       })
       .catch((error) => {
         swal(`${error.code}`, `${error.message}`, "error");
+        setLoading(false);
       });
   };
   if (loading) {
@@ -124,7 +127,7 @@ const Login = () => {
                       </a>
                     </label>
                   </div>
-                  <div className="form-control mb-5 pl-0.5 input input-bordered">
+                  {/* <div className="form-control mb-5 pl-0.5 input input-bordered">
                     <div className="mt-3.5">
                       <LoadCanvasTemplate reloadColor="#ffa300" />
                     </div>
@@ -147,12 +150,12 @@ const Login = () => {
                       </button>
                     </div>
                     <p className="text-success">{validateSuccess}</p>
-                  </div>
+                  </div> */}
                   <div className="form-control mt-6">
                     <input
                       type="submit"
                       value="Login"
-                      disabled={disabled}
+                      // disabled={disabled}
                       className="btn btn-outline"
                     />
                     <p className="text-[#ffa300] text-center text-sm mt-2">

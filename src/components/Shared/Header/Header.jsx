@@ -3,10 +3,15 @@ import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../providers/AuthProvider";
 import swal from "sweetalert";
 import Loading from "../Loading";
+import { FaShoppingCart } from "react-icons/fa";
+import useCart from "../../../hooks/useCart";
 
 const Header = () => {
   const { user, logOut, loading } = useContext(AuthContext);
   const [headerBg, setHeaderBg] = useState(false);
+  const navigate = useNavigate();
+  const [cart] = useCart();
+
   window.onscroll = () => {
     if (window.scrollY > 270) {
       setHeaderBg(true);
@@ -14,6 +19,7 @@ const Header = () => {
       setHeaderBg(false);
     }
   };
+
   const navItems = [
     { title: "home", link: "home" },
     { title: "our menu", link: "menu" },
@@ -21,6 +27,7 @@ const Header = () => {
     { title: "contact us", link: "contact" },
     { title: "dashboard", link: "dashboard" },
   ];
+
   const navOptions = (
     <>
       {navItems.map((item, i) => (
@@ -37,7 +44,7 @@ const Header = () => {
       ))}
     </>
   );
-  const navigate = useNavigate();
+
   const handleLogOut = () => {
     logOut()
       .then(() => {
@@ -101,11 +108,28 @@ const Header = () => {
         <ul className="menu menu-horizontal px-1">{navOptions}</ul>
       </div>
       <div className="max-w-max">
+        <li className="list-none mr-3">
+          <Link className="indicator">
+            <span className="indicator-item badge badge-warning">
+              {cart.length}
+            </span>
+            <div className="pt-1.5">
+              <FaShoppingCart className="text-xl" />
+            </div>
+          </Link>
+        </li>
         {user ? (
           <div className="dropdown dropdown-end">
             <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
               <div className="w-10 rounded-full">
-                <img src={user?.photoURL} alt={user?.displayName} />
+                <img
+                  src={
+                    user?.photoURL
+                      ? user.photoURL
+                      : "/assets/images/login/profile.png"
+                  }
+                  alt={user?.displayName}
+                />
               </div>
             </label>
             <ul
@@ -127,7 +151,7 @@ const Header = () => {
             </ul>
           </div>
         ) : (
-          <li>
+          <li className="list-none">
             <Link
               className={`font-bold uppercase ${
                 !headerBg && "hover:text-[#ffa300]"

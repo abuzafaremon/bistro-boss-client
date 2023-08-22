@@ -5,6 +5,7 @@ import { AuthContext } from "../../providers/AuthProvider";
 import { Helmet } from "react-helmet-async";
 import Loading from "../../components/Shared/Loading";
 import swal from "sweetalert";
+import SocialLogin from "../../components/Shared/SocialLogin/SocialLogin";
 
 const SignUp = () => {
   const {
@@ -179,6 +180,7 @@ const SignUp = () => {
                         Please Login
                       </Link>
                     </p>
+                    <SocialLogin />
                   </div>
                 </form>
               </div>

@@ -10,6 +10,7 @@ import { AuthContext } from "../../providers/AuthProvider";
 import { Helmet } from "react-helmet-async";
 import swal from "sweetalert";
 import Loading from "../../components/Shared/Loading";
+import SocialLogin from "../../components/Shared/SocialLogin/SocialLogin";
 
 const Login = () => {
   const [disabled, setDisabled] = useState(true);
@@ -165,6 +166,7 @@ const Login = () => {
                         Create a New Account
                       </Link>
                     </p>
+                    <SocialLogin />
                   </div>
                 </form>
               </div>

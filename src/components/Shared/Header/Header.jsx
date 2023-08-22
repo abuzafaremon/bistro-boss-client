@@ -25,7 +25,6 @@ const Header = () => {
     { title: "our menu", link: "menu" },
     { title: "our shop", link: "shop/salad" },
     { title: "contact us", link: "contact" },
-    { title: "dashboard", link: "dashboard" },
   ];
 
   const navOptions = (
@@ -109,7 +108,7 @@ const Header = () => {
       </div>
       <div className="max-w-max">
         <li className="list-none mr-3">
-          <Link className="indicator">
+          <Link to="/dashboard/mycart" className="indicator">
             <span className="indicator-item badge badge-warning">
               {cart.length}
             </span>
@@ -141,6 +140,9 @@ const Header = () => {
                   {user?.displayName}
                   <span className="badge">Profile</span>
                 </a>
+              </li>
+              <li>
+                <Link to="/dashboard/home">Dashboard</Link>
               </li>
               <li>
                 <a>Setting</a>

@@ -24,21 +24,37 @@ const SignUp = () => {
       reset();
       // Update Profile
       updateUserProfile(data.name, data.photoURL)
-        .then((user) => {
-          console.log(user);
-          swal("User Created Successful", "Please Login", "success");
+        .then(() => {
+          // send user data to mongodb
+          const saveUser = { name: data.name, email: data.email };
+          fetch("http://localhost:5000/users", {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: JSON.stringify(saveUser),
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              if (data.insertedId) {
+                swal("User Created Successful", "Please Login", "success");
+              }
+            });
         })
         .catch((err) => {
           swal("", `${err}`, "error");
         });
+
       logOut().then(() => {
         navigate("/login");
       });
     });
   };
+
   if (loading) {
     return <Loading />;
   }
+
   return (
     <>
       <Helmet>

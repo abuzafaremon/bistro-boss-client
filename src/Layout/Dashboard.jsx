@@ -6,12 +6,17 @@ import {
   FaHamburger,
   FaShoppingBag,
   FaAngleDoubleRight,
+  FaUtensils,
+  FaList,
+  FaBook,
+  FaUsers,
 } from "react-icons/fa";
 import { NavLink, Outlet } from "react-router-dom";
 import useCart from "../hooks/useCart";
 
 const Dashboard = () => {
   const [cart] = useCart();
+  const isAdmin = true;
   return (
     <div className="drawer lg:drawer-open bg-base-200">
       <input id="dashboardSidebar" type="checkbox" className="drawer-toggle" />
@@ -29,33 +34,70 @@ const Dashboard = () => {
         <label htmlFor="dashboardSidebar" className="drawer-overlay"></label>
         <ul className="menu p-4 w-52 md:w-60 h-full text-base-content bg-warning">
           {/* Sidebar content here */}
-          <li>
-            <NavLink to="home">
-              <FaHome />
-              User Home
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to="reservation">
-              <FaCalendarAlt />
-              Reservation
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to="paymenthistory">
-              <FaWallet />
-              Payment History
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to="mycart">
-              <FaShoppingCart />
-              <span>My Cart</span>
-              <span className="indicator-item badge badge-warning">
-                {cart.length}
-              </span>
-            </NavLink>
-          </li>
+          {isAdmin ? (
+            <>
+              <li>
+                <NavLink to="home">
+                  <FaHome />
+                  Admin Home
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="additem">
+                  <FaUtensils />
+                  Add Item
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="manageitems">
+                  <FaList />
+                  Manage Items
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="bookings">
+                  <FaBook />
+                  Manage Bookings
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="users">
+                  <FaUsers />
+                  All Users
+                </NavLink>
+              </li>
+            </>
+          ) : (
+            <>
+              <li>
+                <NavLink to="home">
+                  <FaHome />
+                  User Home
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="reservation">
+                  <FaCalendarAlt />
+                  Reservation
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="paymenthistory">
+                  <FaWallet />
+                  Payment History
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="mycart">
+                  <FaShoppingCart />
+                  <span>My Cart</span>
+                  <span className="indicator-item badge badge-warning">
+                    {cart.length}
+                  </span>
+                </NavLink>
+              </li>
+            </>
+          )}
           <div className="divider"></div>
           <li>
             <NavLink to="/">

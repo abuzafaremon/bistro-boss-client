@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
@@ -6,16 +6,16 @@ import {
   LoadCanvasTemplate,
   validateCaptcha,
 } from "react-simple-captcha";
-import { AuthContext } from "../../providers/AuthProvider";
 import { Helmet } from "react-helmet-async";
 import swal from "sweetalert";
 import Loading from "../../components/Shared/Loading";
 import SocialLogin from "../../components/Shared/SocialLogin/SocialLogin";
+import useAuth from "../../hooks/useAuth";
 
 const Login = () => {
   const [disabled, setDisabled] = useState(true);
   const [validateSuccess, setValidateSuccess] = useState("");
-  const { loginUser, loading, setLoading } = useContext(AuthContext);
+  const { loginUser, loading, setLoading } = useAuth();
 
   const {
     register,

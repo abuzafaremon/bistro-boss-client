@@ -1,13 +1,13 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { AuthContext } from "../../../providers/AuthProvider";
 import swal from "sweetalert";
 import Loading from "../Loading";
 import { FaShoppingCart } from "react-icons/fa";
 import useCart from "../../../hooks/useCart";
+import useAuth from "../../../hooks/useAuth";
 
 const Header = () => {
-  const { user, logOut, loading } = useContext(AuthContext);
+  const { user, logOut, loading } = useAuth();
   const [headerBg, setHeaderBg] = useState(false);
   const navigate = useNavigate();
   const [cart] = useCart();

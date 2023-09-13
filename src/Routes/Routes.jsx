@@ -11,6 +11,9 @@ import Dashboard from "../Layout/Dashboard";
 import MyCart from "../pages/Dashboard/MyCart/MyCart";
 import DashboardHome from "../pages/Dashboard/Home";
 import Users from "../pages/Dashboard/Admin/Users";
+import AdminRoute from "./AdminRoute";
+import AddItem from "../pages/Dashboard/Admin/AddItem";
+import NoAccess from "../pages/NotFound/NoAccess";
 
 export const router = createBrowserRouter([
   {
@@ -58,7 +61,19 @@ export const router = createBrowserRouter([
       // admin routes
       {
         path: "users",
-        element: <Users />,
+        element: (
+          <AdminRoute>
+            <Users />
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "additem",
+        element: (
+          <AdminRoute>
+            <AddItem />
+          </AdminRoute>
+        ),
       },
     ],
   },
@@ -73,5 +88,9 @@ export const router = createBrowserRouter([
   {
     path: "*",
     element: <NotFound />,
+  },
+  {
+    path: "/noaccess",
+    element: <NoAccess />,
   },
 ]);

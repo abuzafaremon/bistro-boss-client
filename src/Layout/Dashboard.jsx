@@ -13,10 +13,11 @@ import {
 } from "react-icons/fa";
 import { NavLink, Outlet } from "react-router-dom";
 import useCart from "../hooks/useCart";
+import useAdmin from "../hooks/useAdmin";
 
 const Dashboard = () => {
   const [cart] = useCart();
-  const isAdmin = true;
+  const [isAdmin] = useAdmin();
   return (
     <div className="drawer lg:drawer-open bg-base-200">
       <input id="dashboardSidebar" type="checkbox" className="drawer-toggle" />
@@ -45,7 +46,7 @@ const Dashboard = () => {
               <li>
                 <NavLink to="additem">
                   <FaUtensils />
-                  Add Item
+                  Add an Item
                 </NavLink>
               </li>
               <li>

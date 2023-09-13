@@ -3,27 +3,32 @@ import { Helmet } from "react-helmet-async";
 import SectionHeader from "../../../components/Shared/SectionHeader/SectionHeader";
 import { FaTrashAlt, FaUserShield, FaUsers } from "react-icons/fa";
 import swal from "sweetalert";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const Users = () => {
+  const [axiosSecure] = useAxiosSecure();
   const { data: users = [], refetch } = useQuery(["users"], async () => {
-    const res = await fetch("http://localhost:5000/users");
-    return res.json();
+    const res = await axiosSecure.get("/users");
+    return res.data;
   });
 
   // make admin
   const handleMakeAdmin = (user) => {
     if (user.role !== "admin") {
       swal({
-        title: "Are you sure?",
-        text: `You want to make ${user.name} is an Admin`,
+        title: "Make Admin?",
+        text: `Are you sure You want to make ${user.name} is an Admin?`,
         icon: "warning",
         buttons: true,
         dangerMode: true,
       }).then((yes) => {
         if (yes) {
-          fetch(`http://localhost:5000/users/admin/${user._id}`, {
-            method: "PATCH",
-          })
+          fetch(
+            `https://bistro-boss-server-abuzafaremon.vercel.app/users/admin/${user._id}`,
+            {
+              method: "PATCH",
+            }
+          )
             .then((res) => res.json())
             .then((data) => {
               if (data.modifiedCount) {
@@ -47,9 +52,12 @@ const Users = () => {
       dangerMode: true,
     }).then((willDelete) => {
       if (willDelete) {
-        fetch(`http://localhost:5000/users/${user._id}`, {
-          method: "DELETE",
-        })
+        fetch(
+          `https://bistro-boss-server-abuzafaremon.vercel.app/users/${user._id}`,
+          {
+            method: "DELETE",
+          }
+        )
           .then((res) => res.json())
           .then((data) => {
             if (data.deletedCount > 0) {

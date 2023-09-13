@@ -107,16 +107,18 @@ const Header = () => {
         <ul className="menu menu-horizontal px-1">{navOptions}</ul>
       </div>
       <div className="max-w-max">
-        <li className="list-none mr-3">
-          <Link to="/dashboard/mycart" className="indicator">
-            <span className="indicator-item badge badge-warning">
-              {cart.length}
-            </span>
-            <div className="pt-1.5">
-              <FaShoppingCart className="text-xl" />
-            </div>
-          </Link>
-        </li>
+        {user && (
+          <li className="list-none mr-3">
+            <Link to="/dashboard/mycart" className="indicator">
+              <span className="indicator-item badge badge-warning">
+                {cart?.length || 0}
+              </span>
+              <div className="pt-1.5">
+                <FaShoppingCart className="text-xl" />
+              </div>
+            </Link>
+          </li>
+        )}
         {user ? (
           <div className="dropdown dropdown-end">
             <label tabIndex={0} className="btn btn-ghost btn-circle avatar">

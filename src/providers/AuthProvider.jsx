@@ -51,18 +51,20 @@ const AuthProvider = ({ children }) => {
       setUser(currentUser);
       if (currentUser) {
         axios
-          .post("http://localhost:5000/jwt", { email: currentUser.email })
+          .post("https://bistro-boss-server-abuzafaremon.vercel.app/jwt", {
+            email: currentUser.email,
+          })
           .then((res) => {
-            console.log(res.data.token);
             localStorage.setItem("access-token", res.data.token);
+            setLoading(false);
           });
       } else {
         localStorage.removeItem("access-token");
+        setLoading(false);
       }
-      setLoading(false);
     });
     return () => {
-      unsubscribe();
+      return unsubscribe();
     };
   }, []);
 

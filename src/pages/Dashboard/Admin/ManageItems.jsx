@@ -5,11 +5,18 @@ import useMenu from "../../../hooks/useMenu";
 import swal from "sweetalert";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import Loading from "../../../components/Shared/Loading";
+import { useState } from "react";
+import EditItem from "./EditItem";
 
 const ManageItems = () => {
+  const [editItem, setEditItem] = useState(null);
   const [menu, loading, refetch] = useMenu();
   const [axiosSecure] = useAxiosSecure();
-  const handleEdit = () => {};
+
+  const handleEdit = (item) => {
+    setEditItem(item);
+  };
+
   const handleDelete = (item) => {
     swal({
       title: "Are you sure?",
@@ -23,6 +30,17 @@ const ManageItems = () => {
           if (res.data.deletedCount > 0) {
             refetch();
             swal("Item deleted successfully", "", "success");
+            swal({
+              title: "Delete Image",
+              text: `Do you want to delete image from hosting?`,
+              icon: "warning",
+              buttons: true,
+              dangerMode: true,
+            }).then((yes) => {
+              if (yes) {
+                window.open(`${item.deleteImage}`, "_blank");
+              }
+            });
           }
         });
       }
@@ -32,61 +50,71 @@ const ManageItems = () => {
     return <Loading />;
   }
   return (
-    <div>
-      <Helmet>
-        <title>Bistro Boss | Add Item</title>
-      </Helmet>
-      <SectionHeader subTitle="---Whats New---" title="Manage All Items" />
-      <div className="bg-white p-2 md:p-10">
-        <div className="overflow-x-auto">
-          <table className="table table-zebra">
-            {/* head */}
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>Item Image</th>
-                <th>Item Name</th>
-                <th>Price</th>
-                <th>Edit</th>
-                <th>Delete</th>
-              </tr>
-            </thead>
-            <tbody>
-              {menu.map((item, i) => (
-                <tr key={item._id}>
-                  <th>{i + 1}</th>
-                  <td>
-                    <div className="avatar">
-                      <div className="mask mask-squircle w-12 h-12">
-                        <img src={item.image} alt={item.name} />
-                      </div>
-                    </div>
-                  </td>
-                  <td>{item.name}</td>
-                  <td>{item.price}</td>
-                  <td>
-                    <button
-                      onClick={() => handleEdit(item)}
-                      className="btn btn-warning btn-sm btn-square text-white text-lg"
-                    >
-                      <FaEdit title="Admin" />
-                    </button>
-                  </td>
-                  <td>
-                    <button
-                      onClick={() => handleDelete(item)}
-                      className="btn btn-error btn-sm btn-square"
-                    >
-                      <FaTrashAlt className="text-lg text-white" />
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+    <>
+      {editItem ? (
+        <EditItem
+          editItem={editItem}
+          setEditItem={setEditItem}
+          refetch={refetch}
+        />
+      ) : (
+        <div>
+          <Helmet>
+            <title>Bistro Boss | Add Item</title>
+          </Helmet>
+          <SectionHeader subTitle="---Whats New---" title="Manage All Items" />
+          <div className="bg-white p-2 md:p-10">
+            <div className="overflow-x-auto">
+              <table className="table table-zebra">
+                {/* head */}
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Item Image</th>
+                    <th>Item Name</th>
+                    <th>Price</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {[...menu].reverse().map((item, i) => (
+                    <tr key={item._id}>
+                      <th>{i + 1}</th>
+                      <td>
+                        <div className="avatar">
+                          <div className="mask mask-squircle w-12 h-12">
+                            <img src={item.image} alt={item.name} />
+                          </div>
+                        </div>
+                      </td>
+                      <td>{item.name}</td>
+                      <td>{item.price}</td>
+                      <td>
+                        <button
+                          onClick={() => handleEdit(item)}
+                          className="btn btn-warning btn-sm btn-square text-white text-lg"
+                        >
+                          <FaEdit title="Admin" />
+                        </button>
+                      </td>
+                      <td>
+                        <button
+                          onClick={() => handleDelete(item)}
+                          className="btn btn-error btn-sm btn-square"
+                        >
+                          <FaTrashAlt className="text-lg text-white" />
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
+      )}
+    </>
   );
 };
 

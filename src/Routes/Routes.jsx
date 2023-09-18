@@ -15,6 +15,7 @@ import AdminRoute from "./AdminRoute";
 import AddItem from "../pages/Dashboard/Admin/AddItem";
 import NoAccess from "../pages/NotFound/NoAccess";
 import ManageItems from "../pages/Dashboard/Admin/ManageItems";
+import EditItem from "../pages/Dashboard/Admin/EditItem";
 
 export const router = createBrowserRouter([
   {

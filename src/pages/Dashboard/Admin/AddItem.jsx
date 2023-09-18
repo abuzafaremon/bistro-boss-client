@@ -5,14 +5,16 @@ import { useForm } from "react-hook-form";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import swal from "sweetalert";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const imageHostingToken = import.meta.env.VITE_Image_Upload_Token;
 
 const AddItem = () => {
   const [loading, setLoading] = useState(false);
   const imageHostingUrl = `https://api.imgbb.com/1/upload?key=${imageHostingToken}`;
-  const { register, handleSubmit, reset } = useForm();
+  const { register, handleSubmit } = useForm();
   const [axiosSecure] = useAxiosSecure();
+  const navigate = useNavigate();
 
   const onSubmit = (data) => {
     setLoading(true);
@@ -29,6 +31,7 @@ const AddItem = () => {
           const deleteURL = imgRes.data.delete_url;
           const { name, category, recipe, price } = data;
           const newItem = {
+            _id: Date.now().toString(),
             name,
             category: category.toLowerCase(),
             recipe,
@@ -38,7 +41,7 @@ const AddItem = () => {
           };
           axiosSecure.post("/menu", newItem).then((data) => {
             if (data.data.insertedId) {
-              reset();
+              navigate("/dashboard/manageitems");
               setLoading(false);
               swal("Item added successfully", "", "success");
             }
@@ -79,6 +82,8 @@ const AddItem = () => {
                 <option>Deserts</option>
                 <option>Soup</option>
                 <option>Drinks</option>
+                <option>Popular</option>
+                <option>Offered</option>
               </select>
             </div>
             <div className="form-control w-full">

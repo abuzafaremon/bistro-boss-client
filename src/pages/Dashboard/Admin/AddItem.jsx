@@ -3,9 +3,9 @@ import SectionHeader from "../../../components/Shared/SectionHeader/SectionHeade
 import { FaUtensils } from "react-icons/fa";
 import { useForm } from "react-hook-form";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
-import swal from "sweetalert";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const imageHostingToken = import.meta.env.VITE_Image_Upload_Token;
 
@@ -43,7 +43,12 @@ const AddItem = () => {
             if (data.data.insertedId) {
               navigate("/dashboard/manageitems");
               setLoading(false);
-              swal("Item added successfully", "", "success");
+              Swal.fire({
+                position: "center",
+                icon: "success",
+                title: "Item added successfully",
+                timer: 1200,
+              });
             }
           });
         }
@@ -125,7 +130,9 @@ const AddItem = () => {
               disabled={loading}
             >
               {loading ? (
-                "Loading..."
+                <>
+                  <span className="loading loading-spinner"></span> Adding...
+                </>
               ) : (
                 <>
                   <span>Add Item</span>

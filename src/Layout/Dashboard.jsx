@@ -77,24 +77,30 @@ const Dashboard = () => {
                 </NavLink>
               </li>
               <li>
-                <NavLink to="reservation">
-                  <FaCalendarAlt />
-                  Reservation
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to="paymenthistory">
-                  <FaWallet />
-                  Payment History
-                </NavLink>
-              </li>
-              <li>
                 <NavLink to="mycart">
                   <FaShoppingCart />
                   <span>My Cart</span>
                   <span className="indicator-item badge badge-warning">
                     {cart.length}
                   </span>
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="reservation">
+                  <FaCalendarAlt />
+                  Book a Table
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="mybooking">
+                  <FaCalendarAlt />
+                  My Booking
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="paymenthistory">
+                  <FaWallet />
+                  Payment History
                 </NavLink>
               </li>
             </>

@@ -4,6 +4,7 @@ import SectionHeader from "../../../components/Shared/SectionHeader/SectionHeade
 import { FaTrashAlt } from "react-icons/fa";
 import swal from "sweetalert";
 import Loading from "../../../components/Shared/Loading";
+import Swal from "sweetalert2";
 
 const MyCart = () => {
   const [cart, refetch, isLoading] = useCart();
@@ -28,13 +29,24 @@ const MyCart = () => {
           .then((data) => {
             if (data.deletedCount > 0) {
               refetch();
-              swal("Your Item has been deleted!", "", "success");
+              Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "Your Item has been deleted!",
+                showConfirmButton: false,
+                timer: 1200,
+              });
             } else {
               swal("Something went wrong", "", "error");
             }
           });
       } else {
-        swal("Your Item is safe!");
+        Swal.fire({
+          position: "top-end",
+          title: "Your Item is safe!",
+          showConfirmButton: false,
+          timer: 1200,
+        });
       }
     });
   };

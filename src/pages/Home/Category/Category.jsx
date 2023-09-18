@@ -6,12 +6,12 @@ import SectionHeader from "../../../components/Shared/SectionHeader/SectionHeade
 
 const Category = () => {
   const images = [
-    { img: "/assets/images/home/itemSlide/slide1.jpg", legend: "salads" },
-    { img: "/assets/images/home/itemSlide/slide2.jpg", legend: "pizzas" },
-    { img: "/assets/images/home/itemSlide/slide3.jpg", legend: "soups" },
-    { img: "/assets/images/home/itemSlide/slide1.jpg", legend: "salads" },
-    { img: "/assets/images/home/itemSlide/slide2.jpg", legend: "pizzas" },
-    { img: "/assets/images/home/itemSlide/slide4.jpg", legend: "deserts" },
+    { img: "/assets/images/home/itemSlide/slide1.jpg", legend: "salad" },
+    { img: "/assets/images/home/itemSlide/slide2.jpg", legend: "pizza" },
+    { img: "/assets/images/home/itemSlide/slide3.jpg", legend: "soup" },
+    { img: "/assets/images/home/itemSlide/slide1.jpg", legend: "salad" },
+    { img: "/assets/images/home/itemSlide/slide2.jpg", legend: "pizza" },
+    { img: "/assets/images/home/itemSlide/slide4.jpg", legend: "dessert" },
   ];
 
   return (
@@ -35,10 +35,10 @@ const Category = () => {
             <div key={i}>
               <img src={image.img} alt={`slider${i}`} />
               <Link
-                to={image.legend}
+                to={`/shop/${image.legend}`}
                 className="legend text-3xl text-white uppercase"
               >
-                {image.legend}
+                {image.legend}s
               </Link>
             </div>
           ))}

@@ -5,9 +5,11 @@ import Loading from "../Loading";
 import { FaShoppingCart } from "react-icons/fa";
 import useCart from "../../../hooks/useCart";
 import useAuth from "../../../hooks/useAuth";
+import useAdmin from "../../../hooks/useAdmin";
 
 const Header = () => {
   const { user, logOut, loading } = useAuth();
+  const [isAdmin] = useAdmin();
   const [headerBg, setHeaderBg] = useState(false);
   const navigate = useNavigate();
   const [cart] = useCart();
@@ -107,7 +109,7 @@ const Header = () => {
         <ul className="menu menu-horizontal px-1">{navOptions}</ul>
       </div>
       <div className="max-w-max">
-        {user && (
+        {user && !isAdmin && (
           <li className="list-none mr-3">
             <Link to="/dashboard/mycart" className="indicator">
               <span className="indicator-item badge badge-warning">

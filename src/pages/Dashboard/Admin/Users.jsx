@@ -4,6 +4,7 @@ import SectionHeader from "../../../components/Shared/SectionHeader/SectionHeade
 import { FaTrashAlt, FaUserShield, FaUsers } from "react-icons/fa";
 import swal from "sweetalert";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import Swal from "sweetalert2";
 
 const Users = () => {
   const [axiosSecure] = useAxiosSecure();
@@ -33,13 +34,22 @@ const Users = () => {
             .then((data) => {
               if (data.modifiedCount) {
                 refetch();
-                swal(`${user.name} is an Admin now!`, "", "success");
+                Swal.fire({
+                  position: "center",
+                  icon: "success",
+                  title: `${user.name} is an Admin now!`,
+                  timer: 1500,
+                });
               }
             });
         }
       });
     } else {
-      swal(`${user.name} already is an admin`, "");
+      Swal.fire({
+        position: "top-end",
+        title: `${user.name} already is an admin`,
+        timer: 1200,
+      });
     }
   };
 
@@ -62,13 +72,24 @@ const Users = () => {
           .then((data) => {
             if (data.deletedCount > 0) {
               refetch();
-              swal("The user has been deleted!", "", "success");
+              Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "The user has been deleted!",
+                showConfirmButton: false,
+                timer: 1200,
+              });
             } else {
               swal("Something went wrong", "", "error");
             }
           });
       } else {
-        swal("The User is safe!");
+        Swal.fire({
+          position: "top-end",
+          title: "The User is safe!",
+          showConfirmButton: false,
+          timer: 1200,
+        });
       }
     });
   };

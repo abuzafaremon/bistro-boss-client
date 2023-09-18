@@ -29,7 +29,6 @@ const ManageItems = () => {
         axiosSecure.delete(`/menu/${item._id}`).then((res) => {
           if (res.data.deletedCount > 0) {
             refetch();
-            swal("Item deleted successfully", "", "success");
             swal({
               title: "Delete Image",
               text: `Do you want to delete image from hosting?`,
@@ -60,7 +59,7 @@ const ManageItems = () => {
       ) : (
         <div>
           <Helmet>
-            <title>Bistro Boss | Add Item</title>
+            <title>Bistro Boss | Manage Items</title>
           </Helmet>
           <SectionHeader subTitle="---Whats New---" title="Manage All Items" />
           <div className="bg-white p-2 md:p-10">

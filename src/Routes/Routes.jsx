@@ -8,14 +8,14 @@ import Login from "../pages/Login/Login";
 import SignUp from "../pages/SignUp/SignUp";
 import PrivateRoute from "./PrivateRoute";
 import Dashboard from "../Layout/Dashboard";
-import MyCart from "../pages/Dashboard/MyCart/MyCart";
+import MyCart from "../pages/Dashboard/User/MyCart";
 import DashboardHome from "../pages/Dashboard/Home";
 import Users from "../pages/Dashboard/Admin/Users";
 import AdminRoute from "./AdminRoute";
 import AddItem from "../pages/Dashboard/Admin/AddItem";
 import NoAccess from "../pages/NotFound/NoAccess";
 import ManageItems from "../pages/Dashboard/Admin/ManageItems";
-import EditItem from "../pages/Dashboard/Admin/EditItem";
+import BookTable from "../pages/Dashboard/User/BookTable";
 
 export const router = createBrowserRouter([
   {
@@ -59,6 +59,10 @@ export const router = createBrowserRouter([
       {
         path: "mycart",
         element: <MyCart />,
+      },
+      {
+        path: "reservation",
+        element: <BookTable />,
       },
       // admin routes
       {

@@ -55,6 +55,28 @@ const Login = () => {
         setLoading(false);
       });
   };
+  const guestAdminLogin = () => {
+    loginUser("guestadmin@gmail.com", "11!aaA")
+      .then(() => {
+        // Signed in
+        navigate(from, { replace: true });
+      })
+      .catch((error) => {
+        swal(`${error.code}`, `${error.message}`, "error");
+        setLoading(false);
+      });
+  };
+  const guestUserLogin = () => {
+    loginUser("guestuser@gmail.com", "11!aaA")
+      .then(() => {
+        // Signed in
+        navigate(from, { replace: true });
+      })
+      .catch((error) => {
+        swal(`${error.code}`, `${error.message}`, "error");
+        setLoading(false);
+      });
+  };
   if (loading) {
     return <Loading />;
   }
@@ -159,6 +181,20 @@ const Login = () => {
                       // disabled={disabled}
                       className="btn btn-outline"
                     />
+                    <div className="flex flex-1 mt-2">
+                      <button
+                        onClick={guestUserLogin}
+                        className="btn btn-outline btn-sm w-1/2"
+                      >
+                        Guest User
+                      </button>
+                      <button
+                        onClick={guestAdminLogin}
+                        className="btn btn-outline btn-sm w-1/2"
+                      >
+                        Guest Admin
+                      </button>
+                    </div>
                     <p className="text-[#ffa300] text-center text-sm mt-2">
                       New Here?
                       <Link to="/signup" className="font-bold">

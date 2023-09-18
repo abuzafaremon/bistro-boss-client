@@ -2,10 +2,13 @@ import swal from "sweetalert";
 import { useNavigate } from "react-router-dom";
 import useCart from "../../hooks/useCart";
 import useAuth from "../../hooks/useAuth";
+import Swal from "sweetalert2";
+import useAdmin from "../../hooks/useAdmin";
 
 const ItemCard = ({ item }) => {
   const { image, name, recipe } = item;
   const { user } = useAuth();
+  const [isAdmin] = useAdmin();
   const [, refetch] = useCart();
   const navigate = useNavigate();
   const handleAddToCart = (item) => {
@@ -28,7 +31,13 @@ const ItemCard = ({ item }) => {
         .then((data) => {
           if (data.insertedId) {
             refetch();
-            swal("Added to cart", "", "success");
+            Swal.fire({
+              position: "top-end",
+              icon: "success",
+              title: "Added to cart",
+              showConfirmButton: false,
+              timer: 1000,
+            });
           }
         });
     } else {
@@ -37,7 +46,6 @@ const ItemCard = ({ item }) => {
         text: "To Order Your Food",
         icon: "warning",
         buttons: ["Cancel", "Login"],
-
         dangerMode: true,
       }).then((ok) => {
         if (ok) {
@@ -57,12 +65,18 @@ const ItemCard = ({ item }) => {
           {recipe?.split(" ").slice(0, 9).join(" ")}
         </p>
         <div className="card-actions justify-center">
-          <button
-            onClick={() => handleAddToCart(item)}
-            className="uppercase text-[#ffa300] border-b-[3px] border-b-[#ffa300] lg:text-xl font-medium bg-[#E8E8E8] hover:bg-[#1F2937] px-3 lg:px-5 py-2 rounded-lg transition-all"
-          >
-            Add to cart
-          </button>
+          {isAdmin ? (
+            <button className="btn" disabled>
+              Add to cart
+            </button>
+          ) : (
+            <button
+              onClick={() => handleAddToCart(item)}
+              className="uppercase text-[#ffa300] border-b-[3px] border-b-[#ffa300] lg:text-xl font-medium bg-[#E8E8E8] hover:bg-[#1F2937] px-3 lg:px-5 py-2 rounded-lg transition-all"
+            >
+              Add to cart
+            </button>
+          )}
         </div>
       </div>
     </div>

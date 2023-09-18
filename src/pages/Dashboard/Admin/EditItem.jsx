@@ -4,7 +4,7 @@ import { FaUtensils } from "react-icons/fa";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
-import swal from "sweetalert";
+import Swal from "sweetalert2";
 
 const imageHostingToken = import.meta.env.VITE_Image_Upload_Token;
 
@@ -58,7 +58,12 @@ const EditItem = ({ editItem, setEditItem, refetch }) => {
                   setEditItem(false);
                   refetch();
                   setLoading(false);
-                  swal("Item updated successfully", "", "success");
+                  Swal.fire({
+                    position: "center",
+                    icon: "success",
+                    title: "Item updated successfully",
+                    timer: 1200,
+                  });
                 }
               });
           } else {
@@ -81,7 +86,12 @@ const EditItem = ({ editItem, setEditItem, refetch }) => {
           setEditItem(false);
           refetch();
           setLoading(false);
-          swal("Item updated successfully", "", "success");
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Item updated successfully",
+            timer: 1200,
+          });
         }
       });
     }
@@ -191,10 +201,12 @@ const EditItem = ({ editItem, setEditItem, refetch }) => {
               disabled={loading}
             >
               {loading ? (
-                "Loading..."
+                <>
+                  <span className="loading loading-spinner"></span> Updating...
+                </>
               ) : (
                 <>
-                  <span>Add Item</span>
+                  <span>Update Item</span>
                   <FaUtensils />
                 </>
               )}

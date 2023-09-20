@@ -17,6 +17,7 @@ import NoAccess from "../pages/NotFound/NoAccess";
 import ManageItems from "../pages/Dashboard/Admin/ManageItems";
 import BookTable from "../pages/Dashboard/User/BookTable";
 import MyBooking from "../pages/Dashboard/User/MyBooking";
+import ManageBooking from "../pages/Dashboard/Admin/ManageBooking";
 
 export const router = createBrowserRouter([
   {
@@ -91,6 +92,14 @@ export const router = createBrowserRouter([
         element: (
           <AdminRoute>
             <ManageItems />
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "managebooking",
+        element: (
+          <AdminRoute>
+            <ManageBooking />
           </AdminRoute>
         ),
       },

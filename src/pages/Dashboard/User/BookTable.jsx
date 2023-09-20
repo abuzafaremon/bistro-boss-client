@@ -16,6 +16,15 @@ const BookTable = () => {
 
   const onSubmit = (data) => {
     setLoading(true);
+    // const booking = {
+    //   name: data.name,
+    //   email: data.email,
+    //   guest: data.guest,
+    //   phone: data.phone,
+    //   date: data.date,
+    //   time: data.time,
+    //   status:"Pending",
+    // };
     axiosSecure.post("/booking", data).then((data) => {
       if (data.data.insertedId) {
         setLoading(false);
@@ -110,6 +119,12 @@ const BookTable = () => {
               className="input input-bordered w-full"
             />
           </div>
+          <input
+            {...register("status")}
+            type="text"
+            value="Pending"
+            className="hidden"
+          />
           <div className="form-control pt-2">
             <button className="btn btn-warning">
               {loading ? (

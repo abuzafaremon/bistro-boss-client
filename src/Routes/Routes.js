@@ -16,6 +16,7 @@ import AddItem from "../pages/Dashboard/Admin/AddItem";
 import NoAccess from "../pages/NotFound/NoAccess";
 import ManageItems from "../pages/Dashboard/Admin/ManageItems";
 import BookTable from "../pages/Dashboard/User/BookTable";
+import MyBooking from "../pages/Dashboard/User/MyBooking";
 
 export const router = createBrowserRouter([
   {
@@ -63,6 +64,10 @@ export const router = createBrowserRouter([
       {
         path: "reservation",
         element: <BookTable />,
+      },
+      {
+        path: "mybooking",
+        element: <MyBooking />,
       },
       // admin routes
       {

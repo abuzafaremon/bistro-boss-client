@@ -7,6 +7,7 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import Loading from "../../../components/Shared/Loading";
 import { useState } from "react";
 import EditItem from "./EditItem";
+import Swal from "sweetalert2";
 
 const ManageItems = () => {
   const [editItem, setEditItem] = useState(null);
@@ -29,16 +30,24 @@ const ManageItems = () => {
         axiosSecure.delete(`/menu/${item._id}`).then((res) => {
           if (res.data.deletedCount > 0) {
             refetch();
-            swal({
-              title: "Delete Image",
-              text: `Do you want to delete image from hosting?`,
-              icon: "warning",
-              buttons: true,
-              dangerMode: true,
-            }).then((yes) => {
-              if (yes) {
-                window.open(`${item.deleteImage}`, "_blank");
-              }
+            if (item.deleteImage) {
+              swal({
+                title: "Delete Image",
+                text: `Do you want to delete image from hosting?`,
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+              }).then((yes) => {
+                if (yes) {
+                  window.open(`${item.deleteImage}`, "_blank");
+                }
+              });
+            }
+            Swal.fire({
+              position: "top-end",
+              icon: "success",
+              title: "Item deleted successfully",
+              timer: 1200,
             });
           }
         });

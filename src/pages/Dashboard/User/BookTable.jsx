@@ -5,6 +5,8 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import { FaCalendarAlt } from "react-icons/fa";
+import OurLocation from "./OurLocation";
 
 const BookTable = () => {
   const [loading, setLoading] = useState(false);
@@ -115,12 +117,16 @@ const BookTable = () => {
                   <span className="loading loading-spinner"></span> Booking...
                 </>
               ) : (
-                "Submit"
+                <>
+                  <span>Book a table</span>
+                  <FaCalendarAlt />
+                </>
               )}
             </button>
           </div>
         </form>
       </div>
+      <OurLocation />
     </div>
   );
 };

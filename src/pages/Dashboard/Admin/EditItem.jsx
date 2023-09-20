@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { useState } from "react";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
+import swal from "sweetalert";
 
 const imageHostingToken = import.meta.env.VITE_Image_Upload_Token;
 
@@ -58,8 +59,21 @@ const EditItem = ({ editItem, setEditItem, refetch }) => {
                   setEditItem(false);
                   refetch();
                   setLoading(false);
+                  if (editItem.deleteImage) {
+                    swal({
+                      title: "Delete Image",
+                      text: `Do you want to delete previous image from hosting?`,
+                      icon: "warning",
+                      buttons: true,
+                      dangerMode: true,
+                    }).then((yes) => {
+                      if (yes) {
+                        window.open(`${editItem.deleteImage}`, "_blank");
+                      }
+                    });
+                  }
                   Swal.fire({
-                    position: "center",
+                    position: "top-end",
                     icon: "success",
                     title: "Item updated successfully",
                     timer: 1200,

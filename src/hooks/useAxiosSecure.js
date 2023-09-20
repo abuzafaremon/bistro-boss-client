@@ -8,22 +8,17 @@ const useAxiosSecure = () => {
   const navigate = useNavigate();
 
   const axiosSecure = axios.create({
-    baseURL: "http://localhost:5000",
+    baseURL: "https://bistro-boss-server-abuzafaremon.vercel.app",
   });
 
   useEffect(() => {
-    axiosSecure.interceptors.request.use(
-      (config) => {
-        const token = localStorage.getItem("access-token");
-        if (token) {
-          config.headers["Authorization"] = `Bearer ${token}`;
-        }
-        return config;
-      },
-      (error) => {
-        return Promise.reject(error);
+    axiosSecure.interceptors.request.use((config) => {
+      const token = localStorage.getItem("access-token");
+      if (token) {
+        config.headers["Authorization"] = `Bearer ${token}`;
       }
-    );
+      return config;
+    });
 
     axiosSecure.interceptors.response.use(
       (response) => {

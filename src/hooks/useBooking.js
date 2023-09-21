@@ -6,15 +6,18 @@ const useBooking = () => {
   const { user } = useAuth();
   const [axiosSecure] = useAxiosSecure();
 
-  const { data: booking = [] } = useQuery({
+  const {
+    data: booking = [],
+    refetch,
+    isLoading,
+  } = useQuery({
     queryKey: ["booking", user?.email],
     queryFn: async () => {
       const res = await axiosSecure("/booking");
-      console.log(res.data);
       return res.data;
     },
   });
 
-  return [booking];
+  return [booking, refetch, isLoading];
 };
 export default useBooking;

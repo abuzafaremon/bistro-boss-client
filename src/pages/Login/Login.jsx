@@ -68,7 +68,7 @@ const Login = () => {
       });
   };
   const guestUserLogin = () => {
-    loginUser("guestuser@gmail.com", "aaAA1!")
+    loginUser("guestuser@gmail.com", "11!aaA")
       .then(() => {
         // Signed in
         navigate(from, { replace: true });

@@ -16,15 +16,6 @@ const BookTable = () => {
 
   const onSubmit = (data) => {
     setLoading(true);
-    // const booking = {
-    //   name: data.name,
-    //   email: data.email,
-    //   guest: data.guest,
-    //   phone: data.phone,
-    //   date: data.date,
-    //   time: data.time,
-    //   status:"Pending",
-    // };
     axiosSecure.post("/booking", data).then((data) => {
       if (data.data.insertedId) {
         setLoading(false);

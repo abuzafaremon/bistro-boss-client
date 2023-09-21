@@ -2,11 +2,36 @@ import { Helmet } from "react-helmet-async";
 import SectionHeader from "../../../components/Shared/SectionHeader/SectionHeader";
 import useBooking from "../../../hooks/useBooking";
 import { FaTrashAlt } from "react-icons/fa";
+import swal from "sweetalert";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import Swal from "sweetalert2";
 
 const MyBooking = () => {
-  const [booking] = useBooking();
+  const [booking, refetch] = useBooking();
+  const [axiosSecure] = useAxiosSecure();
   const handleDelete = (id) => {
-    console.log(id);
+    swal({
+      title: "Are you sure?",
+      text: `You won't be able to revert this!`,
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    }).then((yes) => {
+      if (yes) {
+        axiosSecure.delete(`/booking/${id}`).then((res) => {
+          if (res.data.deletedCount > 0) {
+            refetch();
+            Swal.fire({
+              position: "top-end",
+              icon: "success",
+              title: "Item deleted successfully",
+              showConfirmButton: false,
+              timer: 1200,
+            });
+          }
+        });
+      }
+    });
   };
   return (
     <div>

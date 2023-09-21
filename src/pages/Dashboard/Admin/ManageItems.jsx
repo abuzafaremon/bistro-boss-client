@@ -80,7 +80,7 @@ const ManageItems = () => {
                     <th>#</th>
                     <th>Item Image</th>
                     <th>Item Name</th>
-                    <th>Price</th>
+                    <th>$Price</th>
                     <th>Edit</th>
                     <th>Delete</th>
                   </tr>
@@ -97,7 +97,7 @@ const ManageItems = () => {
                         </div>
                       </td>
                       <td>{item.name}</td>
-                      <td>{item.price}</td>
+                      <td>${item.price}</td>
                       <td>
                         <button
                           onClick={() => handleEdit(item)}

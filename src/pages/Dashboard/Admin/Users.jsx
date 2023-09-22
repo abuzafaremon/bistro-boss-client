@@ -119,7 +119,9 @@ const Users = () => {
                   <td>
                     <button
                       onClick={() => handleMakeAdmin(user)}
-                      className="btn btn-warning btn-sm btn-square text-white text-lg"
+                      className={`btn btn-sm btn-square text-white text-lg ${
+                        user.role === "admin" ? "btn-success" : "btn-warning"
+                      }`}
                     >
                       {user.role === "admin" ? (
                         <FaUserShield title="Admin" />

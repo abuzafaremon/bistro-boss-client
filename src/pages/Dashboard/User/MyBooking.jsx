@@ -9,6 +9,7 @@ import Swal from "sweetalert2";
 const MyBooking = () => {
   const [booking, refetch] = useBooking();
   const [axiosSecure] = useAxiosSecure();
+  // const totalPrice = booking.map((item)=>item.guest.split(' ')[0])
   const handleDelete = (id) => {
     swal({
       title: "Are you sure?",
@@ -42,7 +43,6 @@ const MyBooking = () => {
       <div className="bg-white p-2 md:p-10">
         <div className="flex items-center justify-between uppercase bg-warning text-white font-bold p-4 mb-2">
           <h2>Total Bookings: {booking.length}</h2>
-          <h2>Total Price:{}</h2>
           <button className="btn btn-xs">Pay</button>
         </div>
         <div className="overflow-x-auto">
@@ -54,6 +54,7 @@ const MyBooking = () => {
                 <th className="px-1 md:px-4">Guest Number</th>
                 <th className="px-2 md:px-4">Date</th>
                 <th className="px-2 md:px-4">Time</th>
+                <th className="px-2 md:px-4">Bill</th>
                 <th className="px-2 md:px-4">Status</th>
                 <th className="px-1 md:px-4 text-end">Action</th>
               </tr>
@@ -66,6 +67,9 @@ const MyBooking = () => {
                   <td className="px-1 md:px-4">{book.guest}</td>
                   <td className="px-1 md:px-4">{book.date}</td>
                   <td className="px-1 md:px-4">{book.time}</td>
+                  <td className="px-1 md:px-4">
+                    ${book.guest.split(" ")[0] * 5}
+                  </td>
                   <td
                     className={`px-1 md:px-4 ${
                       book.status === "Pending"

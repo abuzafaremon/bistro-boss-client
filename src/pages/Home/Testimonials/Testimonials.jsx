@@ -1,11 +1,12 @@
 import { Carousel } from "react-responsive-carousel";
 import SectionHeader from "../../../components/Shared/SectionHeader/SectionHeader";
-import { useEffect, useState } from "react";
 import { FaQuoteLeft } from "react-icons/fa";
 
 //rating resources
 import { Rating, RoundedStar } from "@smastrom/react-rating";
 import "@smastrom/react-rating/style.css";
+import { useQuery } from "@tanstack/react-query";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const customStyles = {
   itemShapes: RoundedStar,
@@ -14,13 +15,21 @@ const customStyles = {
 };
 
 const Testimonials = () => {
-  const [reviews, setReviews] = useState([]);
+  const [axiosSecure] = useAxiosSecure();
 
-  useEffect(() => {
-    fetch("reviews.json")
-      .then((res) => res.json())
-      .then((data) => setReviews(data));
-  }, []);
+  // useEffect(() => {
+  //   fetch("http://localhost:5000/reviews")
+  //     .then((res) => res.json())
+  //     .then((data) => setReviews(data));
+  // }, []);
+
+  const { data: reviews = [] } = useQuery({
+    queryKey: ["reviews"],
+    queryFn: async () => {
+      const res = await axiosSecure("/reviews");
+      return res.data;
+    },
+  });
 
   return (
     <section className="py-10 px-2 lg:px-0 max-w-screen-lg mx-auto">
@@ -38,7 +47,7 @@ const Testimonials = () => {
             autoPlay
             infiniteLoop
           >
-            {reviews.map(({ _id, details, name, rating }) => (
+            {reviews?.map(({ _id, details, name, rating }) => (
               <div key={_id}>
                 <div className="flex justify-center py-2 text-4xl">
                   <FaQuoteLeft />

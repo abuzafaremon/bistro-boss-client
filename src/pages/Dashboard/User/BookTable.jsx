@@ -63,7 +63,7 @@ const BookTable = () => {
           </div>
           <div className="form-control w-full">
             <label className="label font-semibold">
-              <span className="label-text">Time*</span>
+              <span className="label-text">Num of Guest*</span>
             </label>
             <select
               {...register("guest", { required: true })}

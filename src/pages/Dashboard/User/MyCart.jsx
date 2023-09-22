@@ -58,8 +58,8 @@ const MyCart = () => {
       <SectionHeader subTitle="---My Cart---" title="WANNA ADD MORE?" />
       <div className="bg-white p-2 md:p-10">
         <div className="flex items-center justify-between uppercase bg-warning text-white font-bold p-4 mb-2">
-          <h2>Total Orders:{cart.length}</h2>
-          <h2>Total Price:{totalPrice}</h2>
+          <h2>Total Orders: {cart.length}</h2>
+          <h2>Total Price: {totalPrice}</h2>
           <button className="btn btn-xs">Pay</button>
         </div>
         <div className="overflow-x-auto">
@@ -70,7 +70,7 @@ const MyCart = () => {
                 <th className="px-1 md:px-4">#</th>
                 <th className="px-2 md:px-4">Food</th>
                 <th className="px-1 md:px-4">Item Name</th>
-                <th className="px-1 md:px-4 text-end">Price</th>
+                <th className="px-1 md:px-4">$Price</th>
                 <th className="px-1 md:px-4 text-end">Action</th>
               </tr>
             </thead>
@@ -86,7 +86,7 @@ const MyCart = () => {
                     </div>
                   </td>
                   <td className="px-1 md:px-4">{item.name}</td>
-                  <td className="text-end px-1 md:px-4">${item.price}</td>
+                  <td className="px-1 md:px-4">${item.price}</td>
                   <td className="px-1 md:px-4 text-end">
                     <button
                       onClick={() => handleDelete(item)}

@@ -11,6 +11,7 @@ import {
   FaBook,
   FaUsers,
 } from "react-icons/fa";
+import { MdReviews } from "react-icons/md";
 import { NavLink, Outlet } from "react-router-dom";
 import useCart from "../hooks/useCart";
 import useAdmin from "../hooks/useAdmin";
@@ -101,6 +102,12 @@ const Dashboard = () => {
                 <NavLink to="paymenthistory">
                   <FaWallet />
                   Payment History
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="addreview">
+                  <MdReviews className="text-lg" />
+                  Add Review
                 </NavLink>
               </li>
             </>

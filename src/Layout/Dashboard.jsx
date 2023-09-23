@@ -41,7 +41,7 @@ const Dashboard = () => {
               <li>
                 <NavLink to="home">
                   <FaHome />
-                  Admin Home
+                  Admin Dashboard
                 </NavLink>
               </li>
               <li>
@@ -74,7 +74,7 @@ const Dashboard = () => {
               <li>
                 <NavLink to="home">
                   <FaHome />
-                  User Home
+                  User Dashboard
                 </NavLink>
               </li>
               <li>

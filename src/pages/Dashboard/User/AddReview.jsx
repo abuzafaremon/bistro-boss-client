@@ -28,6 +28,7 @@ const AddReview = () => {
     setLoading(true);
     const review = {
       name: data.name,
+      email: user?.email,
       details: data.details,
       rating: rating,
     };

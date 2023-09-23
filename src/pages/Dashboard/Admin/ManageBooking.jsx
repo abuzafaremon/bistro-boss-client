@@ -12,7 +12,9 @@ const ManageBooking = () => {
 
   const handleComplete = (book) => {
     swal({
-      title: "Change Status?",
+      title: `Change Status to ${
+        book.status === "Pending" ? "Complete" : "Incomplete"
+      }?`,
       text: `Do you want to change status of this booking?`,
       icon: "warning",
       buttons: ["No", "Yes"],

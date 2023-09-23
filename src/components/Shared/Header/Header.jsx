@@ -108,7 +108,7 @@ const Header = () => {
       <div className="navbar-end hidden lg:flex">
         <ul className="menu menu-horizontal px-1">{navOptions}</ul>
       </div>
-      <div className="max-w-max">
+      <div className="navbar-end lg:max-w-max">
         {user && !isAdmin && (
           <li className="list-none mr-3">
             <Link to="/dashboard/mycart" className="indicator">
@@ -140,10 +140,10 @@ const Header = () => {
               className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 text-black font-semibold rounded-box w-52"
             >
               <li>
-                <a className="justify-between">
+                <Link to="/dashboard/home" className="justify-between">
                   {user?.displayName}
                   <span className="badge">Profile</span>
-                </a>
+                </Link>
               </li>
               <li>
                 <Link to="/dashboard/home">Dashboard</Link>

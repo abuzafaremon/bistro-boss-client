@@ -18,7 +18,7 @@ const Testimonials = () => {
   const [axiosSecure] = useAxiosSecure();
 
   // useEffect(() => {
-  //   fetch("http://localhost:5000/reviews")
+  //   fetch("https://bistro-boss-server-abuzafaremon.vercel.app/reviews")
   //     .then((res) => res.json())
   //     .then((data) => setReviews(data));
   // }, []);

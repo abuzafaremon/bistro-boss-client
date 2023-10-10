@@ -19,6 +19,7 @@ import BookTable from "../pages/Dashboard/User/BookTable";
 import MyBooking from "../pages/Dashboard/User/MyBooking";
 import ManageBooking from "../pages/Dashboard/Admin/ManageBooking";
 import AddReview from "../pages/Dashboard/User/AddReview";
+import Pay from "../pages/Dashboard/User/Pay";
 
 export const router = createBrowserRouter([
   {
@@ -70,6 +71,10 @@ export const router = createBrowserRouter([
       {
         path: "mybooking",
         element: <MyBooking />,
+      },
+      {
+        path: "pay",
+        element: <Pay />,
       },
       {
         path: "addreview",

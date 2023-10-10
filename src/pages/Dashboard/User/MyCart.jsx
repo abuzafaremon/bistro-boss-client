@@ -5,6 +5,7 @@ import { FaTrashAlt } from "react-icons/fa";
 import swal from "sweetalert";
 import Loading from "../../../components/Shared/Loading";
 import Swal from "sweetalert2";
+import { Link } from "react-router-dom";
 
 const MyCart = () => {
   const [cart, refetch, isLoading] = useCart();
@@ -19,9 +20,12 @@ const MyCart = () => {
       dangerMode: true,
     }).then((willDelete) => {
       if (willDelete) {
-        fetch(`http://localhost:5000/carts/${item._id}`, {
-          method: "DELETE",
-        })
+        fetch(
+          `https://bistro-boss-server-abuzafaremon.vercel.app/carts/${item._id}`,
+          {
+            method: "DELETE",
+          }
+        )
           .then((res) => res.json())
           .then((data) => {
             if (data.deletedCount > 0) {
@@ -60,7 +64,9 @@ const MyCart = () => {
         <div className="flex items-center justify-between uppercase bg-warning text-white font-bold p-4 mb-2">
           <h2>Total Orders: {cart.length}</h2>
           <h2>Total Price: {totalPrice}</h2>
-          <button className="btn btn-xs">Pay</button>
+          <Link to="/dashboard/pay" className="btn btn-xs">
+            Pay
+          </Link>
         </div>
         <div className="overflow-x-auto">
           <table className="table">

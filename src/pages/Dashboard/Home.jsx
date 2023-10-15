@@ -83,9 +83,7 @@ const UserHome = () => {
   const { data: reviews = [] } = useQuery({
     queryKey: ["reviews"],
     queryFn: async () => {
-      const res = await axiosSecure(
-        "https://bistro-boss-server-abuzafaremon.vercel.app/reviews"
-      );
+      const res = await axiosSecure("http://localhost:5000/reviews");
       return res.data;
     },
   });

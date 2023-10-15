@@ -3,10 +3,14 @@ import SectionHeader from "../../../components/Shared/SectionHeader/SectionHeade
 import { Elements } from "@stripe/react-stripe-js";
 import CheckoutForm from "./CheckoutForm";
 import { loadStripe } from "@stripe/stripe-js";
+import useCart from "../../../hooks/useCart";
 
 const stripePromise = loadStripe(import.meta.env.VITE_payment_gateway_pk);
 
 const Pay = () => {
+  const [cart] = useCart();
+  const total = cart.reduce((sum, item) => sum + item.price, 0);
+  const price = parseFloat(total.toFixed(2));
   return (
     <div>
       <Helmet>
@@ -15,7 +19,7 @@ const Pay = () => {
       <SectionHeader subTitle="---Please Pay---" title="PAYMENT" />
       <div className="bg-white p-2 md:p-10">
         <Elements stripe={stripePromise}>
-          <CheckoutForm />
+          <CheckoutForm price={price} />
         </Elements>
       </div>
     </div>

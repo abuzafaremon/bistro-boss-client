@@ -17,7 +17,7 @@ const SocialLogin = () => {
         email: loggedInUser.email,
       };
 
-      fetch("https://bistro-boss-server-abuzafaremon.vercel.app/users", {
+      fetch("http://localhost:5000/users", {
         method: "POST",
         headers: {
           "content-type": "application/json",

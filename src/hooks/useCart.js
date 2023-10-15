@@ -21,7 +21,7 @@ export default useCart;
 
 // queryFn: async () => {
 //   const res = await fetch(
-//     `https://bistro-boss-server-abuzafaremon.vercel.app/carts?email=${user?.email}`,
+//     `http://localhost:5000/carts?email=${user?.email}`,
 //     { headers: { authorization: `bearer ${token}` } }
 //   );
 //   return res.json();

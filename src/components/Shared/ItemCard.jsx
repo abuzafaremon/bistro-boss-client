@@ -20,7 +20,7 @@ const ItemCard = ({ item }) => {
         price: item.price,
         email: user.email,
       };
-      fetch("https://bistro-boss-server-abuzafaremon.vercel.app/carts", {
+      fetch("http://localhost:5000/carts", {
         method: "POST",
         headers: {
           "content-type": "application/json",
@@ -72,7 +72,7 @@ const ItemCard = ({ item }) => {
           ) : (
             <button
               onClick={() => handleAddToCart(item)}
-              className="uppercase text-[#ffa300] border-b-[3px] border-b-[#ffa300] lg:text-xl font-medium bg-[#E8E8E8] hover:bg-[#1F2937] px-3 lg:px-5 rounded-lg transition-all"
+              className="uppercase text-[#ffa300] border-b-[3px] border-b-[#ffa300] lg:text-xl font-medium bg-[#E8E8E8] hover:bg-[#1F2937] px-3 lg:px-5 py-2 rounded-lg transition-all"
             >
               Add to cart
             </button>

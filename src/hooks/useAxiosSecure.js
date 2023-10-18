@@ -3,13 +3,13 @@ import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import useAuth from "./useAuth";
 
+const axiosSecure = axios.create({
+  baseURL: "https://bistro-boss-server-abuzafaremon.vercel.app",
+});
+
 const useAxiosSecure = () => {
   const { logOut } = useAuth();
   const navigate = useNavigate();
-
-  const axiosSecure = axios.create({
-    baseURL: "http://localhost:5000",
-  });
 
   useEffect(() => {
     axiosSecure.interceptors.request.use((config) => {
@@ -33,7 +33,7 @@ const useAxiosSecure = () => {
         return Promise.reject(error);
       }
     );
-  }, [logOut, navigate, axiosSecure]);
+  }, [logOut, navigate]);
 
   return [axiosSecure];
 };

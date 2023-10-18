@@ -24,9 +24,12 @@ const Users = () => {
         dangerMode: true,
       }).then((yes) => {
         if (yes) {
-          fetch(`http://localhost:5000/users/admin/${user._id}`, {
-            method: "PATCH",
-          })
+          fetch(
+            `https://bistro-boss-server-abuzafaremon.vercel.app/users/admin/${user._id}`,
+            {
+              method: "PATCH",
+            }
+          )
             .then((res) => res.json())
             .then((data) => {
               if (data.modifiedCount) {
@@ -59,9 +62,12 @@ const Users = () => {
       dangerMode: true,
     }).then((willDelete) => {
       if (willDelete) {
-        fetch(`http://localhost:5000/users/${user._id}`, {
-          method: "DELETE",
-        })
+        fetch(
+          `https://bistro-boss-server-abuzafaremon.vercel.app/users/${user._id}`,
+          {
+            method: "DELETE",
+          }
+        )
           .then((res) => res.json())
           .then((data) => {
             if (data.deletedCount > 0) {

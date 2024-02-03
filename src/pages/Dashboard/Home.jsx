@@ -14,7 +14,17 @@ import useBooking from "../../hooks/useBooking";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useAdmin from "../../hooks/useAdmin";
-import useMenu from "../../hooks/useMenu";
+import {
+  BarChart,
+  Bar,
+  Cell,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  ResponsiveContainer,
+  PieChart,
+  Pie,
+} from "recharts";
 
 const Home = () => {
   const [isAdmin] = useAdmin();
@@ -24,21 +34,105 @@ const Home = () => {
 export default Home;
 
 const AdminHome = () => {
-  const [menu] = useMenu();
+  const { user } = useAuth();
   const [axiosSecure] = useAxiosSecure();
-  const { data: users = [] } = useQuery(["users"], async () => {
-    const res = await axiosSecure.get("/users");
+  const { data: stats = {} } = useQuery(["admin-stats"], async () => {
+    const res = await axiosSecure("/admin-stats");
     return res.data;
   });
+
+  const colors = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
+
+  const data = [
+    {
+      name: "Page A",
+      uv: 4000,
+      pv: 2400,
+      amt: 2400,
+    },
+    {
+      name: "Page B",
+      uv: 3000,
+      pv: 1398,
+      amt: 2210,
+    },
+    {
+      name: "Page C",
+      uv: 2000,
+      pv: 9800,
+      amt: 2290,
+    },
+    {
+      name: "Page D",
+      uv: 2780,
+      pv: 3908,
+      amt: 2000,
+    },
+  ];
+
+  const getPath = (x, y, width, height) => {
+    return `M${x},${y + height}C${x + width / 3},${y + height} ${
+      x + width / 2
+    },${y + height / 3}
+    ${x + width / 2}, ${y}
+    C${x + width / 2},${y + height / 3} ${x + (2 * width) / 3},${y + height} ${
+      x + width
+    }, ${y + height}
+    Z`;
+  };
+
+  const TriangleBar = (props) => {
+    const { fill, x, y, width, height } = props;
+
+    return <path d={getPath(x, y, width, height)} stroke="none" fill={fill} />;
+  };
+
+  // pie chart data
+  const pieData = [
+    { name: "Group A", value: 400 },
+    { name: "Group B", value: 300 },
+    { name: "Group C", value: 300 },
+    { name: "Group D", value: 200 },
+  ];
+
+  const PIECOLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
+
+  const RADIAN = Math.PI / 180;
+  const renderCustomizedLabel = ({
+    cx,
+    cy,
+    midAngle,
+    innerRadius,
+    outerRadius,
+    percent,
+  }) => {
+    const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
+    const x = cx + radius * Math.cos(-midAngle * RADIAN);
+    const y = cy + radius * Math.sin(-midAngle * RADIAN);
+
+    return (
+      <text
+        x={x}
+        y={y}
+        fill="white"
+        textAnchor={x > cx ? "start" : "end"}
+        dominantBaseline="central"
+      >
+        {`${(percent * 100).toFixed(0)}%`}
+      </text>
+    );
+  };
   return (
     <div>
-      <h2 className="text-xl md:text-3xl mb-5">Hi, Welcome Back!</h2>
+      <h2 className="text-xl md:text-3xl mb-5 mt-5">
+        Hi, {user?.displayName} Welcome Back!
+      </h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-5">
         <div className="w-full bg-gradient-to-r from-purple-500 to-purple-200 flex justify-center items-center rounded p-5">
           <div className="flex items-center gap-3 font-bold text-white">
             <FaWallet className="text-xl" />
             <div>
-              <h3 className="text-3xl">1000</h3>
+              <h3 className="text-3xl">{stats?.revenue}</h3>
               <span className="font-normal">Revenue</span>
             </div>
           </div>
@@ -47,7 +141,7 @@ const AdminHome = () => {
           <div className="flex items-center gap-3 font-bold text-white">
             <FaUsers className="text-xl" />
             <div>
-              <h3 className="text-3xl">{users?.length}</h3>
+              <h3 className="text-3xl">{stats?.users}</h3>
               <span className="font-normal">Customer</span>
             </div>
           </div>
@@ -56,7 +150,7 @@ const AdminHome = () => {
           <div className="flex items-center gap-3 font-bold text-white">
             <SiCodechef className="text-2xl" />
             <div>
-              <h3 className="text-3xl">{menu?.length}</h3>
+              <h3 className="text-3xl">{stats?.products}</h3>
               <span className="font-normal">Products</span>
             </div>
           </div>
@@ -65,11 +159,57 @@ const AdminHome = () => {
           <div className="flex items-center gap-3 font-bold text-white">
             <FaTruck className="text-2xl" />
             <div>
-              <h3 className="text-3xl">500</h3>
+              <h3 className="text-3xl">{stats?.orders}</h3>
               <span className="font-normal">Orders</span>
             </div>
           </div>
         </div>
+      </div>
+      <div className="py-10 flex flex-col md:flex-row">
+        <BarChart
+          width={400}
+          height={300}
+          data={data}
+          margin={{
+            top: 20,
+            right: 30,
+            left: 20,
+            bottom: 5,
+          }}
+        >
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="name" />
+          <YAxis />
+          <Bar
+            dataKey="uv"
+            fill="#8884d8"
+            shape={<TriangleBar />}
+            label={{ position: "top" }}
+          >
+            {data.map((entry, index) => (
+              <Cell key={`cell-${index}`} fill={colors[index % 20]} />
+            ))}
+          </Bar>
+        </BarChart>
+        <PieChart width={300} height={300}>
+          <Pie
+            data={pieData}
+            cx="50%"
+            cy="50%"
+            labelLine={false}
+            label={renderCustomizedLabel}
+            outerRadius={80}
+            fill="#8884d8"
+            dataKey="value"
+          >
+            {pieData.map((entry, index) => (
+              <Cell
+                key={`cell-${index}`}
+                fill={PIECOLORS[index % PIECOLORS.length]}
+              />
+            ))}
+          </Pie>
+        </PieChart>
       </div>
     </div>
   );
@@ -90,9 +230,12 @@ const UserHome = () => {
     },
   });
   const myReviews = reviews.filter((review) => review.email === user?.email);
+
   return (
     <div>
-      <h2 className="text-xl md:text-3xl mb-5">Hi, Welcome Back!</h2>
+      <h2 className="text-xl md:text-3xl mb-5 mt-5">
+        Hi, {user?.displayName} Welcome Back!
+      </h2>
       <div className="flex flex-col items-center md:flex-row gap-5">
         <div className="w-full bg-gradient-to-r from-purple-500 to-purple-200 flex justify-center items-center rounded p-5">
           <div className="flex items-center gap-3 font-bold text-white">
